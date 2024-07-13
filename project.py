@@ -3,7 +3,7 @@ import json
 import yaml
 import xml.etree.ElementTree as ET
 
-def parseargs():
+def parse_args():
     if len(sys.argv) != 3:
         print("Usage: program.exe pathFile1.x pathFile2.y")
         sys.exit(1)
@@ -42,12 +42,12 @@ def convert(input_file, output_file):
     elif input_file.endswith('.yaml') or input_file.endswith('.yml'):
         data = read_yaml(input_file)
     elif input_file.endswith('.xml'):
-        data,  = readxml(inputfile)
+        data, _ = read_xml(input_file)
     else:
         raise ValueError("Unsupported input file format")
 
-    if outputfile.endswith('.json'):
-        writejson(data, output_file)
+    if output_file.endswith('.json'):
+        write_json(data, output_file)
     elif output_file.endswith('.yaml') or output_file.endswith('.yml'):
         write_yaml(data, output_file)
     elif output_file.endswith('.xml'):
@@ -55,7 +55,7 @@ def convert(input_file, output_file):
     else:
         raise ValueError("Unsupported output file format")
 
-if __name == "__main":
+if __name__ == "__main__":
     try:
         input_file, output_file = parse_args()
         convert(input_file, output_file)
